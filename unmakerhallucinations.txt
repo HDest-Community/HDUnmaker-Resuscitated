@@ -1,0 +1,31 @@
+\cd[DERP] \cjEngaging hostile.
+\cd[DERP]  \cjHostile eliminated.
+\cd[DERP]\cg  Operational fault.\cj Standby for repairs.
+\cd[DERP] \cjOut of ammo. Await retrieval.
+\cd[HERP] \cjIFF system alert: enemy pattern recognized.
+\cd[HERP] \cjOperational fault. Please check your manual for proper maintenance. (ERR-42392-41A) Cartridge empty. Shutting down...
+Out of sync with: 
+Error: no such actor \"HDPlayerPawn\" exists. Execution may abort!
+Memory allocation error: recovered segfault at address 00x6f24ff.
+rendering error
+Noise.
+hello
+I hate you.
+This is worthless.
+it hurts
+error
+your eyes
+nothing
+everything is worthless.
+they spawn
+in the cloaks
+you die.
+The dragon can't think, it can only act.
+start anew where the light vanishes
+Its shadow towered in the light, horns larger than its head, sounds that weren't from this time. What a staggering sight.
+The cat was only mad when we first met, after that it forgot we had met at all. Poor cat
+The cat tried to save me. For it kept taking the fish away. The fish that poisoned me.
+The answer lies on the collection of worlds. It simply goes from front to back.
+Feast upon the flowering organs
+For He is \cgKing\cj.
+It just works!

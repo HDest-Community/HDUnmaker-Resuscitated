@@ -1,0 +1,11 @@
+[en enc eng eni ena enz default]
+
+TAG_ARCHON="Unknown Entity";
+OB_ARCHON="%o has been wiped off the face of the universe.";
+TAG_DEMONKEY="Demon Key";
+PICKUP_GLUTTONY="\cxOrange\c-, the symbol of Gluttony.";
+PICKUP_PRIDE="\ctPurple\c-, the symbol of Vanity and Pride.";
+PICKUP_LUST="\czCyan\c-, the symbol of Lust.";
+PICKUP_UNMAKER="You got the an unknown weapon. What the fuck is this?!?!";
+TAG_UNMAKER="The Unmaker";
+OB_UNMAKER="%k has completely unmade %o from the face of the universe.";

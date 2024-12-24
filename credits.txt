@@ -1,0 +1,19 @@
+Unmaker sprites - Midway
+Muzzle flash sprites - Potetobloke
+some messages - grabbed from 'the (Coronation Day)
+Beam stuff - Final Doomer (probably made by Yholl or Sgt. Shivers). shamelessly but unknown where it originally came from really.
+further help - timaeusTestified, Sgt. Major Kiwi, Yoguruto-no-Kami, ZikShadow, and swampyrad
+Armaggedon Black Hole Code - nicked from Accensus's Arcanum mod, maintained by the HDest Community
+
+Sounds
+ARCHON SEE SOUND - Id Software and Eriance
+ARCHON SPRITES - Id Software, Midway, and Eriance
+Sprite edit - Eriance
+Most Armaggedon sounds - 'the Coronation Day
+Armaggedon Firing Sound - Doom 64 by Midway
+Armaggedon Black Hole Main Loop - Diabolo II by Blizzard Entertainment
+Bruiser Demon sounds (Active, pain and death) - Id Software and Blizzard
+Original DSLASER - Midway. Grabbed from Doom 64 Retribution (thanks Zik).
+Gluon Gun Sounds - Valve Software
+(egon attack's main inspiration from the gluon gun)
+More firing sfx - Sorath, which came from Devil's Daggers, provided by a1337spy

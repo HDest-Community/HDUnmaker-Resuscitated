@@ -1,0 +1,176 @@
+class UnmadeRifleman:ReallyDeadRifleman{
+	override void postbeginplay(){
+		super.postbeginplay();
+		bodydamage+=10000;
+	}
+}
+
+class HDUnmakerSpawnerAR:IdleDummy{
+	states{
+		Spawn:
+			tnt1 a 1 nodelay{
+				let corpse = spawn("UnmadeRifleman",pos,ALLOW_REPLACE);
+				if(corpse){
+				corpse.A_SetFriendly(bfriendly);
+				let archon = spawn("BaronUnmaker",corpse.pos,ALLOW_REPLACE);
+					if(archon){
+					archon.translation=corpse.translation;
+					archon.A_SetFriendly(bfriendly);
+		//HDF.TransferSpecials(self, archon);
+					if(!random(0,1))archon.A_GiveInventory("UnmakerUpgrade1Icon",1);
+					if(!random(0,3))archon.A_GiveInventory("UnmakerUpgrade2Icon",1);
+					if(!random(0,7))archon.A_GiveInventory("UnmakerUpgrade3Icon",1);
+					}
+				}
+				let talisman = spawn("SquadSummoner",pos,ALLOW_REPLACE);
+				if(talisman){
+				HDF.TransferSpecials(self, talisman);
+				}
+			}
+	stop;
+	}
+}
+
+//this is to ensure compatibility with Consolation Prize of Doom 64.
+//if you seen warnings regarding with the three items below,
+//please ignore them.
+
+class UnmakerUpgrade1Icon : HDPickup
+{
+	default{
+		+inventory.UNDROPPABLE
+		Inventory.MaxAmount 1;
+		hdpickup.bulk 500;
+		-hdpickup.fitsinbackpack
+		-hdpickup.droptranslation
+		+hdpickup.notinpockets
+		-inventory.invbar
+	}
+}
+
+class UnmakerUpgrade3Icon:HDDamageHandler{
+	default{
+		-hdpickup.fitsinbackpack
+		-inventory.alwayspickup
+		-inventory.invbar
+		+hdpickup.notinpockets
+		+INVENTORY.UNDROPPABLE
+		Inventory.MaxAmount 1;
+	}
+
+	//called from HDPlayerPawn and HDMobBase's DamageMobj
+	//randomly call to make demons insane, approximately 1 in 25
+	override int,name,int,double,int,int,int,int HandleDamagePost(
+		int damage,
+		name mod,
+		int flags,
+		actor inflictor,
+		actor source,
+		double towound,
+		int toburn,
+		int tostun,
+		int tobreak,
+		int toaggravate
+	){
+		if(!random(0,49)){
+			blockthingsiterator it=blockthingsiterator.create(owner,512);
+			A_Quake(5,40,0,512,"brain/cube");
+			array<actor>monsters;monsters.clear();
+			while(it.next()){
+				actor itt=it.thing;
+				let hdit=hdmobbase(itt);
+				if(
+					itt==owner
+					||HDBossBrain(itt)
+					||!itt.bismonster
+					||itt.health<1
+				)continue;
+				monsters.insert(random(0,monsters.size()),itt);
+
+				if(
+					!hdit
+					&&itt.target==owner
+				)itt.A_ClearTarget();
+			}
+			if(monsters.size()){
+				int maxindex=monsters.size()-1;
+				for(int i=0;i<monsters.size();i++){
+					actor mmm1=monsters[i];
+					actor mmm2=monsters[random(0,maxindex)];
+					mmm1.damagemobj(
+						self,mmm2,1,"Balefire"
+					);
+					mmm1.target=mmm2;
+					if(!mmm2.target)mmm2.target=mmm1;
+				}
+			}
+		}
+		return damage,mod,flags,towound,toburn,tostun,tobreak;
+	}
+
+	override void DoEffect(){
+		if(
+			!owner
+			||owner.health<1
+		){
+			return;
+		}
+
+		//just a totally normal day
+		if(
+			random(0,47)>40
+		)owner.A_StartSound("unmaker/scream",
+			666,CHANF_OVERLAP|CHANF_LOCAL,
+			volume:max(0.0001,frandom(0.,1.)*0.0002)*5*10,
+			pitch:max(0.1,frandom(0.,1.)*1.6)
+		);
+
+			if(!random(0,512)){
+				owner.A_StartSound("unmaker/hallu"..int(random(1,9)),
+					CHAN_VOICE,CHANF_OVERLAP|CHANF_LOCAL,frandom(0.,1.)*0.3+0.3
+				);
+			}
+			if(!random(0,512)){
+				array<string>msgs;msgs.clear();
+				string msg=Wads.ReadLump(Wads.CheckNumForName("unmakerhallucinations",0));
+				msg.split(msgs,"\n");
+				msg=msgs[int(clamp(frandom(0.,1.)*msgs.size(),0,msgs.size()-1))];
+				if(msg=="Out of sync with: ")msg=msg..random(1,8);
+				owner.A_Log(msg,true);
+		}
+	}
+}
+
+class PurpleSpeeder : PowerSpeed
+{
+	Default
+	{
+		Powerup.Duration -1;
+		Speed 3;
+	}
+}
+
+class UnmakerUpgrade2Icon:HDPickup{
+	default{
+		-hdpickup.fitsinbackpack
+		-inventory.alwayspickup
+		-inventory.invbar
+		+hdpickup.notinpockets
+		+INVENTORY.UNDROPPABLE
+		Inventory.MaxAmount 1;
+	}
+
+	override void doeffect(){
+		super.doeffect();
+
+		let hdp = HDPlayerPawn(owner);
+		if(hdp&&!hdp.incapacitated)owner.A_GiveInventory("PurpleSpeeder");
+		bool forwards = owner.player&&owner.player.cmd.buttons&BT_FORWARD;
+		bool backwards = owner.player&&owner.player.cmd.buttons&BT_BACK;
+		bool strafeleft = owner.player&&owner.player.cmd.buttons&BT_MOVELEFT;
+		bool straferight = owner.player&&owner.player.cmd.buttons&BT_MOVERIGHT;
+
+		if((forwards||backwards||strafeleft||straferight)&&(hdp&&!hdp.incapacitated)&&!random(0,16))
+		hdp.fatigue+=random(1,3);
+	}
+}

@@ -1,0 +1,18 @@
+Sprite "UMKRF0", 42, 33
+{
+	Offset -139, -81
+	Patch "UKRF_101", 0, 0
+}
+
+Sprite "UMKRG0", 86, 84
+{
+	Offset -118, -64
+	Patch "UKRF_201", 0, 0
+}
+
+Sprite "UMKRH0", 63, 63
+{
+	Offset -129, -72
+	Patch "UKRF_202", 0, 0
+}
+

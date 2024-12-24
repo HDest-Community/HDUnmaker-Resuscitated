@@ -1,0 +1,99 @@
+//below is the event handler required.
+
+class HDD64UnmakerHandler : EventHandler
+{
+
+	bool isplayingdoom64;
+	bool sahd, plhd;
+
+	override void PostUiTick()
+	{
+		if ( sahd || plhd ) ThrowAbortException("why the fuck are you loading this with \ctHDoom\cg?");
+	}
+
+	override void WorldLoaded( WorldEvent e )
+	{
+		//don't spawn if the player's playing with d64
+		for ( int i=0; i<AllActorClasses.size(); i++ )
+		{
+			if ( AllActorClasses[i].GetClassName() == "PlayingDoom64" )
+				isplayingdoom64=true;
+		}
+
+		sahd = false;
+		plhd = false;
+		// detect HDoom "fun" actor and/or weapon
+		// because no horny.
+		for ( int i=0; i<AllActorClasses.size(); i++ )
+		{
+			if ( AllActorClasses[i].GetClassName() == "SexActor" )
+				sahd = true;
+			else if ( AllActorClasses[i].GetClassName() == "HDoomPlayer" )
+				plhd = true;
+		}
+	}
+
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		if (!e.Replacement)
+		{
+			return;
+		}
+
+		switch (e.Replacement.GetClassName())
+		{
+			case 'BlurSphereReplacer':
+				if (random[itemrand]() <= 4)
+				{
+					e.Replacement = "HDUnmakerSpawnerAR";
+				}
+				else if (!isplayingdoom64&&(random[itemrand]() <= 20))
+				{
+					if(!random(0,3))e.Replacement = "HDPurpleDemonKey";
+					else if(!random(0,5))e.Replacement = "HDCyanDemonKey";
+					else e.Replacement = "HDOrangeDemonKey";
+				}else if (!isplayingdoom64&&(random[itemrand]() <= 16))
+				{
+					e.Replacement = "HDUnmaker";
+				}
+				break;
+			case 'BFGReplaces':
+				if (!isplayingdoom64&&(random[itemrand]() <= 10))
+				{
+					if(!random(0,3))e.Replacement = "HDPurpleDemonKey";
+					else if(!random(0,5))e.Replacement = "HDCyanDemonKey";
+					else e.Replacement = "HDOrangeDemonKey";
+				}else if (!isplayingdoom64&&(random[itemrand]() <= 8))
+				{
+					e.Replacement = "HDUnmaker";
+				}
+				break;
+		}
+	}
+
+	override void CheckReplacee(ReplacedEvent e)
+	{
+		switch (e.Replacement.GetClassName())
+		{
+			case 'HDUnmakerSpawnerAR':
+					e.Replacee = "Blursphere";
+				break;
+			case 'HDOrangeDemonKey':
+					e.Replacee = "BFG9000";
+					e.Replacee = "Blursphere";
+				break;
+			case 'HDPurpleDemonKey':
+					e.Replacee = "BFG9000";
+					e.Replacee = "Blursphere";
+				break;
+			case 'HDCyanDemonKey':
+					e.Replacee = "BFG9000";
+					e.Replacee = "Blursphere";
+				break;
+			case 'HDUnmaker':
+					e.Replacee = "BFG9000";
+					e.Replacee = "Blursphere";
+				break;
+		}
+	}
+}
