@@ -386,7 +386,7 @@ class HDUnmaker:HDWeapon{
 
 	altfire:
 		UMKR B 0{
-			if(findinventory("UnmakerUpgrade1Icon")||findinventory("UnmakerUpgrade2Icon")||findinventory("UnmakerUpgrade3Icon"))setweaponstate("Egon");
+			if(pressingzoom() && (findinventory("UnmakerUpgrade1Icon")||findinventory("UnmakerUpgrade2Icon")||findinventory("UnmakerUpgrade3Icon")))setweaponstate("Egon");
 		}
 		UMKR BBBBBBBBBBBBBBBBBB 0 bright light("FIRE")A_ThunderZap(); //doubled it. take it or leave it.
 		UMKR B 1{
