@@ -259,8 +259,8 @@ class HDUnmaker:HDWeapon{
 		inflictor.A_StartSound("weapons/bfgfwoosh",CHAN_WEAPON,CHANF_OVERLAP);
 		let hdp=hdplayerpawn(source);
 		if(
-			inflictor.findinventory("UnmakerUpgrade1Icon")
-		)hdp.aggravateddamage+=10;
+			countinv("HealingMagic")>=300
+		)A_TakeInventory("HealingMagic",300);
 		else hdp.aggravateddamage+=25;
 		weaponstatus[UNMS_CRITTIMER]=0;
 
@@ -744,6 +744,7 @@ class HDUnmaker:HDWeapon{
 			A_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE|WRF_DISABLESWITCH);
 			A_SetTics(max(1,6-int(invoker.weaponstatus[UNMS_TIMER]*0.3)));
 			invoker.weaponstatus[UNMS_TIMER]++;
+			if(!random(0,8))hdmobai.frighten(self,512);
 		}
 		#### B 0{
 			if(invoker.weaponstatus[UNMS_TIMER]>14)A_Refire("shoot");
@@ -759,6 +760,7 @@ class HDUnmaker:HDWeapon{
 		#### B 3{
 			invoker.weaponstatus[UNMS_CRITTIMER]--;
 			A_StartSound("weapons/bfgcharge",random(9005,9007));
+			hdmobai.frighten(self,512);
 			HDUnmaker.Spark(self,1,gunheight()-2);
 			if(invoker.weaponstatus[UNMS_CRITTIMER]<=1){
 				invoker.weaponstatus[UNMS_CRITTIMER]=0;
