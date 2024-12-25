@@ -2,7 +2,7 @@ class HD_GluottonyKey:HDPickup{
     default{
         -hdpickup.fitsinbackpack
         hdpickup.refid "GLT";
-        tag "Gluttony Demon Key";
+        tag "$TAG_ORANGEDEMONKEY";
     }
     states{
     spawn:
@@ -18,7 +18,7 @@ class HD_PrideKey:HDPickup{
     default{
         -hdpickup.fitsinbackpack
         hdpickup.refid "PRD";
-        tag "Pride Demon Key";
+        tag "$TAG_PURPLEDEMONKEY";
     }
     states{
     spawn:
@@ -34,7 +34,7 @@ class HD_LustKey:HDPickup{
     default{
         -hdpickup.fitsinbackpack
         hdpickup.refid "LST";
-        tag "Lust Demon Key";
+        tag "$TAG_CYANDEMONKEY";
     }
     states{
     spawn:
