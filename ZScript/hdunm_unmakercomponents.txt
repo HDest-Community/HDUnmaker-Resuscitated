@@ -81,7 +81,7 @@ class ArmageddonBall:HDFireball{
 			BlockThingsIterator it = BlockThingsIterator.Create(self, EffectRange);
 			while (it.Next())
 			{
-				if ((it.thing is 'HDUnmaker') || ((it.thing is 'BaronUnmaker') && (target == it.thing)) || it.thing is 'ArmaggedonTrail' || !CheckSight(it.thing, SF_IGNOREVISIBILITY) || (hd_pof && it.thing is 'HDPlayerCorpse'))
+				if (it.thing is 'HDDemonKeyBase' || (it.thing is 'HDUnmaker') || ((it.thing is 'BaronUnmaker') && (target == it.thing)) || it.thing is 'ArmaggedonTrail' || !CheckSight(it.thing, SF_IGNOREVISIBILITY) || (hd_pof && it.thing is 'HDPlayerCorpse'))
 				{
 					continue;
 				}
