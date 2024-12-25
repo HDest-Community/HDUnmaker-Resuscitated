@@ -1,4 +1,4 @@
-class ArmaggedonTrail : Actor
+class ArmaggedonTrail : HDActor
 {
 	Default
 	{
@@ -53,7 +53,7 @@ class ArmageddonBall:HDFireball{
 		}
 		goto spawn2;
 	spawn2:
-		BFS1 AB 1{if(target)hdmobai.frighten(target,1024);else hdmobai.frighten(self,1024);}
+		BFS1 AB 3{if(target)hdmobai.frighten(target,1024);else hdmobai.frighten(self,1024);}
 		BFS1 # 0{A_Corkscrew();A_FBSeek(128);}
 		loop;
 	death:
@@ -81,18 +81,18 @@ class ArmageddonBall:HDFireball{
 			BlockThingsIterator it = BlockThingsIterator.Create(self, EffectRange);
 			while (it.Next())
 			{
-				if ((it.thing is 'HDUnmaker') || ((it.thing is 'BaronUnmaker') && (it.thing.target == self)) || it.thing is 'ArmaggedonTrail' || !CheckSight(it.thing, SF_IGNOREVISIBILITY) || (hd_pof && it.thing is 'HDPlayerCorpse'))
+				if ((it.thing is 'HDUnmaker') || ((it.thing is 'BaronUnmaker') && (target == it.thing)) || it.thing is 'ArmaggedonTrail' || !CheckSight(it.thing, SF_IGNOREVISIBILITY) || (hd_pof && it.thing is 'HDPlayerCorpse'))
 				{
 					continue;
 				}
 
-				if (!((it.thing is 'BaronUnmaker') && (it.thing.target == self)) && !(it.thing is 'HDUnmaker') && (!it.thing.bISMONSTER || it.thing.Health <= 0) && Distance3D(it.thing) < 48 && !(it.thing is 'HDPlayerPawn'))
+				if (!((it.thing is 'BaronUnmaker') && (target == it.thing)) && !(it.thing is 'HDUnmaker') && (!it.thing.bISMONSTER || it.thing.Health <= 0) && Distance3D(it.thing) < 48 && !(it.thing is 'HDPlayerPawn'))
 				{
 					it.thing.Destroy();
 					continue;
 				}
 
-				if (!((it.thing is 'BaronUnmaker') && (it.thing.target == self)) && it.thing.Health > 0 && (Distance3D(it.thing) < 128))
+				if (!((it.thing is 'BaronUnmaker') && (target == it.thing)) && it.thing.Health > 0 && (Distance3D(it.thing) < 128))
 				{
 					it.thing.DamageMobj(self, target, it.thing.SpawnHealth()/10, 'unmaker', DMG_FORCED);
 				}
