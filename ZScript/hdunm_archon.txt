@@ -389,6 +389,7 @@ class BaronUnmaker:PainMonster{
 			A_StartSound("weapons/bfgcharge",(armaggedontime>6)?CHAN_AUTO:CHAN_WEAPON);
 			A_SetTics(max(1,6-int(armaggedontime*0.3)));
 			armaggedontime++;
+			hdmobai.frighten(self,512);
 		}
 		#### # 0{
 			if(armaggedontime>14)setstatelabel("armageddonshoot");
@@ -405,6 +406,7 @@ class BaronUnmaker:PainMonster{
 			armaggedoncrittime--;
 			A_StartSound("weapons/bfgcharge",random(9005,9007));
 			HDUnmaker.Spark(self,1,height-2);
+			hdmobai.frighten(self,512);
 			if(armaggedoncrittime<=1){
 				armaggedoncrittime=0;
 				setstatelabel("reallyshoot");
