@@ -221,7 +221,7 @@ class BaronUnmaker:PainMonster{
 		if(bbb){
 			bbb.target=source;
 			bbb.master=source;
-			bbb.pitch=inflictor.pitch;
+			bbb.pitch=inflictor.pitch+45;
 			bbb.angle=inflictor.angle;
 			bbb.vel=inflictor.vel+ballvel*bbb.speed;
 		}
@@ -337,7 +337,7 @@ class BaronUnmaker:PainMonster{
 		loop;
 	shoot:
 		BRUN E 0 A_AlertMonsters(0,AMF_TARGETEMITTER);
-		BRUN E 0 A_Jump(32,"ArmageddonConfirmation");
+		BRUN E 0 A_Jump(2,"ArmageddonConfirmation");
 		BRUN E 0 A_Jump(80,"FireballBegin","MissilePissConfirmation","Fireball2Begin");
 		BRUN E 0 A_Jump(128,"MissileMissile");
 		goto see; //if the player's too close
@@ -382,7 +382,7 @@ class BaronUnmaker:PainMonster{
 	ArmageddonCharge:
 		BRUN D 1;
 		BRUN N 4 A_FaceLastTargetPos(20,20);
-		BRUN N 2 A_FaceLastTargetPos(30,32);
+		BRUN M 2 A_FaceLastTargetPos(30,32);
 	ArmageddonChargeLoop:
 		#### # 1{
 			HDUnmaker.Spark(self,1,height-2);
@@ -395,14 +395,14 @@ class BaronUnmaker:PainMonster{
 			if(armaggedontime>14)setstatelabel("armageddonshoot");
 		}loop;
 	armageddonshoot:
-		#### N 0{
+		#### M 0{
 			armaggedontime=0;
 			armaggedoncrittime=16;
 			bnopain=true;
 			A_StartSound("unmaker/blackholeshoot",CHAN_WEAPON);
 			hdmobai.frighten(self,512);
 		}
-		#### N 3{
+		#### M 3{
 			armaggedoncrittime--;
 			A_StartSound("weapons/bfgcharge",random(9005,9007));
 			HDUnmaker.Spark(self,1,height-2);
@@ -445,7 +445,7 @@ class BaronUnmaker:PainMonster{
 			A_Recoil(0.01);
 			A_FaceLastTargetPos(0.25,0.25);
 			A_CustomRailgun ((10),0,"","ff 55 88",
-					RGF_CENTERZ|RGF_SILENT|RGF_NOPIERCING|RGF_FULLBRIGHT,0,50.0,"EgonUnmaker",0,0,0,1,0.2,1,"None",28);
+					RGF_CENTERZ|RGF_SILENT|RGF_NOPIERCING|RGF_FULLBRIGHT,0,10,"EgonUnmaker",0,0,0,1,0.2,1,"None",28);
 			ticsforloop3++;
 			}else setstatelabel("MissilePissEnd");
 			}
@@ -462,7 +462,7 @@ if(ticsforloop3>105)setstatelabel("MissilePiss2");
 			pissleft--;
 			A_Recoil(0.01);
 			A_CustomRailgun ((10),0,"","ff 55 88",
-					RGF_CENTERZ|RGF_SILENT|RGF_NOPIERCING|RGF_FULLBRIGHT,0,50.0,"EgonUnmaker",0,0,0,1,0.2,1,"None",28);
+					RGF_CENTERZ|RGF_SILENT|RGF_NOPIERCING|RGF_FULLBRIGHT,0,10,"EgonUnmaker",0,0,0,1,0.2,1,"None",28);
 			ticsforloop3++;
 			}else setstatelabel("MissilePissEnd");
 			}
@@ -486,7 +486,7 @@ if(ticsforloop3>105)setstatelabel("MissilePiss2");
 			A_Recoil(0.01);
 			A_FaceLastTargetPos(0.5,0.5);
 			A_CustomRailgun ((10),0,"","ff 55 88",
-					RGF_CENTERZ|RGF_SILENT|RGF_NOPIERCING|RGF_FULLBRIGHT,0,50.0,"EgonUnmaker",0,0,0,1,0.2,1,"None",28);
+					RGF_CENTERZ|RGF_SILENT|RGF_NOPIERCING|RGF_FULLBRIGHT,0,10,"EgonUnmaker",0,0,0,1,0.2,1,"None",28);
 			ticsforloop3++;
 			}else setstatelabel("MissilePissEnd");
 			}
@@ -505,7 +505,7 @@ if(ticsforloop3>105)setstatelabel("MissilePiss2");
 			A_StartSound("weapons/unmakerbeamend",CHAN_WEAPON);
 				A_CustomRailgun((5),0,"","ff 55 88",
 					RGF_CENTERZ|RGF_SILENT|RGF_NOPIERCING|RGF_FULLBRIGHT,
-					0,50.0,"EgonUnmaker",0,0,2048,18,0.2,1.0,"None",28);
+					0,10,"EgonUnmaker",0,0,2048,18,0.2,1.0,"None",28);
 			}
 		BRUN Q 1;
 		UMKR A 0{
